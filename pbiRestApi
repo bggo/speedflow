@@ -29,7 +29,7 @@ STATUS=$(
 
 	echo "API CALL HTTP STATUS:$STATUS" >> $LOG_DIR/$LOG_NAME
 	if [ $STATUS -eq 200 ];then 
-		echo "$2 $3 $4 data sent sucessfully tru pbi api" >> $LOG_DIR/$LOG_NAME
+		echo "$1 $2 $3 $4 data sent sucessfully tru pbi api" >> $LOG_DIR/$LOG_NAME
 	else
 		echo "Something went wrong ($STATUS). Please debug api call manualy using curl" >> $LOG_DIR/$LOG_NAME
 	fi

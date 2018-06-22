@@ -8,8 +8,9 @@ FREQ=1
 #TMP DIR
 TMP_DIR=/opt/speedflow/.tmp
 #Timezone config
-TZ=Brazil/East
+TZONE=Brazil/East
 ## Define if the script send the results to a streaming dataset on powerbi
 SENDTOPBI=True
 #Rest URL PBI
-REST_PBI="https://api.powerbi.com/beta/cef04b19-7776-4a94-b89b-375c77a8f936/datasets/b4949e67-5274-4518-aefa-6e6df80b4580/rows?key=byGbF2mauYDRRpM04PX2yLt06jmoBYLMeoPTJeOqz%2BsEzFnYVHRk%2B2lo4V%2Bhly2fW60s3OOBcM90Om1tYNIDpg%3D%3D"
+#REST_PBI="https://api.powerbi.com/beta/cef04b19-7776-4a94-b89b-375c77a8f936/datasets/b4949e67-5274-4518-aefa-6e6df80b4580/rows?key=byGbF2mauYDRRpM04PX2yLt06jmoBYLMeoPTJeOqz%2BsEzFnYVHRk%2B2lo4V%2Bhly2fW60s3OOBcM90Om1tYNIDpg%3D%3D"
+REST_PBI="https://api.powerbi.com/beta/cef04b19-7776-4a94-b89b-375c77a8f936/datasets/561d4a68-6c12-4aaa-a6fa-8678f3d5c36d/rows?key=21ZxCa5A2pWuG3nS4U79c2bedLX3y%2FbK3TIIDqlkq526qP38x1HHiGMwMzYLEwPPqg1bUyoxZ2MzaslL29Gv0w%3D%3D"

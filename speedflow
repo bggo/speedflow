@@ -2,22 +2,22 @@
 
 load_config()
 {
-source /opt/speedflow/config
+	source /opt/speedflow/config
 }
 
 dep_check()
 {
 #This is a simple test to check this script dependencies.
 
-if ! [ -x "$(command -v $1)" ]; then
-  echo "Error: $1 is not installed. Try apt-get install $1." >&2
-  exit 1
-fi
+	if ! [ -x "$(command -v $1)" ]; then
+		echo "Error: $1 is not installed. Try apt-get install $1." >&2
+		exit 1
+	fi
 
-if ! [ -x "$(command -v $2)" ]; then
-  echo "Error: $2 is not installed. Try apt-get install $2." >&2
-  exit 1
-fi
+	if ! [ -x "$(command -v $2)" ]; then
+		echo "Error: $2 is not installed. Try apt-get install $2." >&2
+		exit 1
+	fi
 
 }
 
@@ -25,24 +25,25 @@ run_speedtest()
 {
 #Check tmp directory
 
-if [ ! -d "$TMP_DIR" ]; then
-	mkdir $TMP_DIR
-fi
+	if [ ! -d "$TMP_DIR" ]; then
+		mkdir $TMP_DIR
+	fi
 
 #Run Speedtest and colect values
-speedtest --secure --simple > $TMP_DIR/.collector
-if [ $? -eq 0 ]
-then
+	speedtest --secure --simple > $TMP_DIR/.collector
+	if [ $? -eq 0 ]
+	then
 #Parse Results
-	PING=$(cat $TMP_DIR/.collector | grep ping -i | cut -d" " -f2)
-	DOWN=$(cat $TMP_DIR/.collector | grep down -i | cut -d" " -f2)
-	UP=$(cat $TMP_DIR/.collector | grep up -i | cut -d" " -f2)
-fi
+		PING=$(cat $TMP_DIR/.collector | grep ping -i | cut -d" " -f2)
+		DOWN=$(cat $TMP_DIR/.collector | grep down -i | cut -d" " -f2)
+		UP=$(cat $TMP_DIR/.collector | grep up -i | cut -d" " -f2)
+	fi
 }
 
 logger()
 {
-	NOW=$(date -u)
+	export TZ=$TZONE
+	NOW=$(date)
 	if [ ! -d "$LOG_DIR" ]; then
 		mkdir $LOG_DIR
 	fi	
@@ -52,9 +53,10 @@ logger()
 
 send_pbi()
 {
+	export TZ=$TZONE
 	shopt -s nocasematch
 	if [[ $SENDTOPBI == "True" ]]; then
-		DATE=$(date +"%Y-%m-%dT%H:%m:%S.0Z")
+		DATE=$(date +"%Y-%m-%dT%H:%M:%S.0Z")
 		$SF_PATH/pbiRestApi $DATE $DOWN $UP $PING
 		echo "PBI Enable - Running" >>$LOG_DIR/$LOG_NAME
 	else
