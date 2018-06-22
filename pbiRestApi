@@ -1,24 +1,40 @@
 #!/bin/bash
+# Parameters Order
+# $1 DATE, $2 DOWN, $3UP and $4 Ping
 
 load_config()
 {
-source /opt/speedflow/config
+	source /opt/speedflow/config
+}
+
+run_api_call()
+{
+
+STATUS=$(
+	curl --include \
+	--request POST \
+	--header "Content-Type: application/json" \
+	--data-binary "[
+	{
+	\"date\" :\"$1\",
+	\"download\" :$2,
+	\"upload\" :$3,
+	\"ping\" :$4
+	}
+	]" \
+	-s -o /dev/null -w '%{http_code}' \
+	"$REST_PBI"
+)
+	
+
+	echo "API CALL HTTP STATUS:$STATUS" >> $LOG_DIR/$LOG_NAME
+	if [ $STATUS -eq 200 ];then 
+		echo "$2 $3 $4 data sent sucessfully tru pbi api" >> $LOG_DIR/$LOG_NAME
+	else
+		echo "Something went wrong ($STATUS). Please debug api call manualy using curl" >> $LOG_DIR/$LOG_NAME
+	fi
+
 }
 
 load_config
-
-# $1 DATE, $2 DOWN, $3UP and $4 Ping
-
-echo "################### $1 $2 $3 $4"
-curl --include \
---request POST \
---header "Content-Type: application/json" \
---data-binary "[
-{
-\"date\" :\"$1\",
-\"download\" :$2,
-\"upload\" :$3,
-\"ping\" :$4
-}
-]" \
-"$REST_PBI"
+run_api_call $1 $2 $3 $4
