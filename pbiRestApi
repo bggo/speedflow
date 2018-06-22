@@ -1,0 +1,24 @@
+#!/bin/bash
+
+load_config()
+{
+source /opt/speedflow/config
+}
+
+load_config
+
+# $1 DATE, $2 DOWN, $3UP and $4 Ping
+
+echo "################### $1 $2 $3 $4"
+curl --include \
+--request POST \
+--header "Content-Type: application/json" \
+--data-binary "[
+{
+\"date\" :\"$1\",
+\"download\" :$2,
+\"upload\" :$3,
+\"ping\" :$4
+}
+]" \
+"$REST_PBI"

@@ -1,8 +1,17 @@
 #Path for speedflow
-#PATH=/opt/speedflow
+SF_PATH=/opt/speedflow
 #LOG_DIR define log directory
 LOG_DIR=/opt/speedflow/logs
 #FREQ define the frequency of the colector (Cron Based 1, 5, 10, 15 or 30 min) 0 to turn off
 FREQ=1
 #TMP DIR
 TMP_DIR=/opt/speedflow/.tmp
+#Timezone config
+TZ=Brazil/East
+
+
+
+## Define if the script send the results to a streaming dataset on powerbi
+SENDTOPBI=True
+#Rest URL PBI
+REST_PBI="https://api.powerbi.com/beta/cef04b19-7776-4a94-b89b-375c77a8f936/datasets/b4949e67-5274-4518-aefa-6e6df80b4580/rows?key=byGbF2mauYDRRpM04PX2yLt06jmoBYLMeoPTJeOqz%2BsEzFnYVHRk%2B2lo4V%2Bhly2fW60s3OOBcM90Om1tYNIDpg%3D%3D"
