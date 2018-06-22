@@ -1,2 +1,2 @@
 #every 5 minutes
-* * * * * speedflow /opt/speedtest/speedflow
+* * * * * speedflow /opt/speedflow/speedflow

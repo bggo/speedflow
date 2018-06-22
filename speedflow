@@ -17,14 +17,20 @@ fi
 
 run_speedtest()
 {
+#Check tmp directory
+
+if [ ! -d "$TMP_DIR" ]; then
+	mkdir $TMP_DIR
+fi
+
 #Run Speedtest and colect values
-speedtest --secure --simple > .collector
+speedtest --secure --simple > $TMP_DIR/.collector
 if [ $? -eq 0 ]
 then
 #Parse Results
-	PING=$(cat .collector | grep ping -i | cut -d" " -f2)
-	DOWN=$(cat .collector | grep down -i | cut -d" " -f2)
-	UP=$(cat .collector | grep up -i | cut -d" " -f2)
+	PING=$(cat $TMP_DIR/.collector | grep ping -i | cut -d" " -f2)
+	DOWN=$(cat $TMP_DIR/.collector | grep down -i | cut -d" " -f2)
+	UP=$(cat $TMP_DIR/.collector | grep up -i | cut -d" " -f2)
 fi
 }
 

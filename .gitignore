@@ -1,3 +1,6 @@
 *log
+.collector
 ./logs/
 ./logs
+.tmp
+.tmp/
