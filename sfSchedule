@@ -1,0 +1,71 @@
+#!/bin/bash
+
+load_config()
+{
+source ./config
+}
+
+remove_schedule()
+{
+
+	sudo rm /etc/cron.d/flow* &> /dev/null
+}
+
+schedule_flow()
+{
+	case $FREQ in
+		0)
+			remove_schedule
+			echo "Speedflow collector turned off"
+		;;
+		1)
+			remove_schedule
+			sudo cp cron/flow1 /etc/cron.d/
+			echo "Speedflow collector set to 1 minute."
+		;;
+   		5)
+			remove_schedule
+			sudo cp cron/flow5 /etc/cron.d/
+			echo "Speedflow collector set to 5 minutes."
+		;;
+   		10)
+			remove_schedule
+			sudo cp cron/flow10 /etc/cron.d/
+			echo "Speedflow collector set to 10 minutes."
+		;;
+   		15)
+			remove_schedule
+			sudo cp cron/flow15 /etc/cron.d/
+			echo "Speedflow collector set to 15 minutes."
+		;;
+   		30)
+			remove_schedule
+			sudo cp cron/flow30 /etc/cron.d/
+			echo "Speedflow collector set to 30 minutes."
+		;;
+		*)
+			echo "$FREQ have a bad value. Please check in config file."
+     		;;
+	esac
+}
+
+restart_cron()
+{
+	sudo service cron restart
+	if [ $? -eq 0 ]
+	then
+		echo "Cron service restarted"
+	else
+		echo "Problem restarting cron service, please check"
+	fi
+}
+
+
+echo "This script uses cron.d to schedule speedflow collector. May require sudo permissions to speedflow user."
+sleep 3
+
+load_config
+schedule_flow
+restart_cron
+
+

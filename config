@@ -1,1 +1,4 @@
+#LOG_DIR define log directory
 LOG_DIR=./logs
+#FREQ define the frequency of the colector (Cron Based 1, 5, 10, 15 or 30 min) 0 to turn off
+FREQ=1

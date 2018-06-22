@@ -1,0 +1,2 @@
+# every minute
+* * * * * speedflow /opt/speedtest/speedflow
