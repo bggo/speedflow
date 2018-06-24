@@ -1,3 +1,5 @@
+# Speedflow user
+SF_USER=speedflow
 #Path for speedflow
 SF_PATH=/opt/speedflow
 #LOG_DIR define log directory
