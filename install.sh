@@ -42,14 +42,14 @@ users_and_groups_check()
 	USER=$(cat /etc/passwd | grep speedflow | cut -d: -f1)
 	GROUP=$(cat /etc/group | grep speedflow | cut -d: -f1)
 
-	if [ $USER == speedflow ] && [ $GROUP == speedflow ]]; then
+	if [ $USER == speedflow ] && [ $GROUP == speedflow ]; then
 		echo "User and group OK"
 	else
 		echo "Creating user and group ...."
 		useradd $SF_USER
 		USER=$(cat /etc/passwd | grep speedflow | cut -d: -f1)
 		GROUP=$(cat /etc/group | grep speedflow | cut -d: -f1)
-		if [ $USER == speedflow ] && [ $GROUP == speedflow ]]; then
+		if [ $USER == speedflow ] && [ $GROUP == speedflow ]; then
 			echo "User and group OK"	
 		else
 			echo "Something went wrong... exiting"
