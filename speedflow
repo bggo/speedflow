@@ -54,13 +54,14 @@ logger()
 send_pbi()
 {
 	export TZ=$TZONE
+	NOW=$(date)
 	shopt -s nocasematch
 	if [[ $SENDTOPBI == "True" ]]; then
 		DATE=$(date +"%Y-%m-%dT%H:%M:%S.0Z")
 		$SF_PATH/pbiRestApi $DATE $DOWN $UP $PING
-		echo "PBI Enable - Running" >>$LOG_DIR/$LOG_NAME
+		echo "$NOW - PBI Enable - Running" >>$LOG_DIR/$LOG_NAME
 	else
-		echo "PBI Disable" >> $LOG_DIR/$LOG_NAME	
+		echo "$NOW - PBI Disable" >> $LOG_DIR/$LOG_NAME	
 	fi
 }
 
