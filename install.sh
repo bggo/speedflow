@@ -8,10 +8,10 @@ load_config()
 checking_files_and_permissions()
 {
 
-	[ -x $SF_PATH/speedflow ] && echo "speedflow ok" || echo "speedflow do not have the right permissions"
-	[ -x $SF_PATH/sfSchedule ] && echo "sfSchedule ok" || echo "sfSchedule do not have the right permissions"
-	[ -x $SF_PATH/pbiRestApi ] && echo "pbiRestApi ok" || echo "pbiRestApi do not have the right permissions"
-	[ -r $SF_PATH/config ] && echo "config ok" || echo "config do not have the right permissions"
+	[ -x $SF_PATH/speedflow ] && echo "speedflow ok" || echo "speedflow do not have the right permissions" && exit 1
+	[ -x $SF_PATH/sfSchedule ] && echo "sfSchedule ok" || echo "sfSchedule do not have the right permissions" && exit 1
+	[ -x $SF_PATH/pbiRestApi ] && echo "pbiRestApi ok" || echo "pbiRestApi do not have the right permissions" && exit 1
+	[ -r $SF_PATH/config ] && echo "config ok" || echo "config do not have the right permissions" && exit 1
 
 }
 
@@ -21,8 +21,8 @@ checking_files_and_permissions()
 copy_files()
 {
 
-	cp ./* $SF_PATH/
-	chown $SF_USER:$SFUSER $SF_PATH
+	cp -r ./* $SF_PATH/
+	chown -r $SF_USER:$SFUSER $SF_PATH
 	chmod +x $SF_PATH/speedflow
 	chmod +x $SF_PATH/sfSchedule
 	chmod +x $SF_PATH/pbiRestApi
