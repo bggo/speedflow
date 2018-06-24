@@ -119,10 +119,21 @@ check_root()
 	fi
 }
 
+set_cron_config()
+{
+
+	echo "Setting cron up"
+	cp $SF_PATH/cron/cronflow /etc/sudoers.d/
+	chmod 0440 /etc/sudoers.d/cronflow
+
+}
+
+
 dep_check speedtest curl
 check_root
 load_config
 start_installer
 users_and_groups_check
 copy_files
+set_cron_config
 checking_files_and_permissions
