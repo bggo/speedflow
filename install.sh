@@ -8,11 +8,30 @@ load_config()
 checking_files_and_permissions()
 {
 
-	[ -x $SF_PATH/speedflow ] && echo "speedflow ok" || echo "speedflow do not have the right permissions" && exit 1
-	[ -x $SF_PATH/sfSchedule ] && echo "sfSchedule ok" || echo "sfSchedule do not have the right permissions" && exit 1
-	[ -x $SF_PATH/pbiRestApi ] && echo "pbiRestApi ok" || echo "pbiRestApi do not have the right permissions" && exit 1
-	[ -r $SF_PATH/config ] && echo "config ok" || echo "config do not have the right permissions" && exit 1
-
+	if [ -x $SF_PATH/speedflow ];then 
+		echo "speedflow script - ok"
+	else
+		echo "speedflow do not have the right permissions - fail"
+		exit 1
+	fi
+	if [ -x $SF_PATH/sfSchedule ];then
+		echo "sfSchedule script - ok"
+	else
+		echo "sfSchedule do not have the right permissions - fail"
+		exit 1
+	fi
+	if [ -x $SF_PATH/pbiRestApi ];then 
+		echo "pbiRestApi script - ok"
+	else 
+		echo "pbiRestApi do not have the right permissions - fail"
+		exit 1
+	fi
+	if [ -r $SF_PATH/config ];then
+		echo "config files - ok"
+	else
+		echo "config do not have the right permissions- fail"
+		exit 1
+	fi
 }
 
 
@@ -43,14 +62,14 @@ users_and_groups_check()
 	GROUP=$(cat /etc/group | grep speedflow | cut -d: -f1)
 
 	if [[ $USER == speedflow ]] && [[ $GROUP == speedflow ]]; then
-		echo "User and group OK"
+		echo "Checking User and group - OK"
 	else
-		echo "Creating user and group ...."
+		echo "No user detected, Creating user and group ...."
 		useradd $SF_USER
 		USER=$(cat /etc/passwd | grep speedflow | cut -d: -f1)
 		GROUP=$(cat /etc/group | grep speedflow | cut -d: -f1)
 		if [[ $USER == speedflow ]] && [[ $GROUP == speedflow ]]; then
-			echo "User and group OK"	
+			echo "User and group created - OK"	
 		else
 			echo "Something went wrong... exiting"
 			exit 1
@@ -74,7 +93,19 @@ start_installer()
 	fi
 }
 
+check_root()
+{
+	if [ "$(whoami)" != "root" ]; then
+        	echo "Script must be run as user: root"
+        	exit -1
+	fi
+}
 
+
+
+
+
+check_root
 load_config
 start_installer
 users_and_groups_check
