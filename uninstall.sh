@@ -15,6 +15,7 @@ rm_files()
 	rm -r /opt/speedflow/
 	rm /etc/sudoers.d/cronflow
 	rm /etc/cron.d/flow*
+	userdel speedflow
 }
 
 check_root
