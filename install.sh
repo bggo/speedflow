@@ -22,7 +22,7 @@ copy_files()
 {
 
 	cp -r ./* $SF_PATH/
-	chown -r $SF_USER:$SFUSER $SF_PATH
+	chown -R $SF_USER:$SFUSER $SF_PATH
 	chmod +x $SF_PATH/speedflow
 	chmod +x $SF_PATH/sfSchedule
 	chmod +x $SF_PATH/pbiRestApi
@@ -42,14 +42,14 @@ users_and_groups_check()
 	USER=$(cat /etc/passwd | grep speedflow | cut -d: -f1)
 	GROUP=$(cat /etc/group | grep speedflow | cut -d: -f1)
 
-	if [ $USER == speedflow ] && [ $GROUP == speedflow ]; then
+	if [[ $USER == speedflow ]] && [[ $GROUP == speedflow ]]; then
 		echo "User and group OK"
 	else
 		echo "Creating user and group ...."
 		useradd $SF_USER
 		USER=$(cat /etc/passwd | grep speedflow | cut -d: -f1)
 		GROUP=$(cat /etc/group | grep speedflow | cut -d: -f1)
-		if [ $USER == speedflow ] && [ $GROUP == speedflow ]; then
+		if [[ $USER == speedflow ]] && [[ $GROUP == speedflow ]]; then
 			echo "User and group OK"	
 		else
 			echo "Something went wrong... exiting"
@@ -66,7 +66,7 @@ start_installer()
 
 	echo "This is a simple script to install speedflow, do you want to proceed? (y/n)"
 	shopt -s nocasematch
-	read ANSWER
+		read ANSWER
 	if [[ $ANSWER == y ]] || [[ $ANSWER == yes ]];then
 		echo "Starting .... "
 	else
