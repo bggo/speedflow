@@ -1,1 +1,1 @@
-speedflow ALL = NOPASSWD: /usr/sbin/service cron *
+speedflow ALL = NOPASSWD: /usr/sbin/service cron *, /bin/rm /etc/cron.d/flow*, /bin/cp
