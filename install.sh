@@ -5,6 +5,24 @@ load_config()
         source config
 }
 
+dep_check()
+{
+#This is a simple test to check this script dependencies.
+
+        if ! [ -x "$(command -v $1)" ]; then
+                echo "Error: $1 is not installed. Try apt-get install $1." >&2
+                exit 1
+        fi
+
+        if ! [ -x "$(command -v $2)" ]; then
+                echo "Error: $2 is not installed. Try apt-get install $2." >&2
+                exit 1
+        fi
+
+}
+
+
+
 checking_files_and_permissions()
 {
 
@@ -101,10 +119,7 @@ check_root()
 	fi
 }
 
-
-
-
-
+dep_check speedtest curl
 check_root
 load_config
 start_installer
