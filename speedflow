@@ -47,7 +47,7 @@ logger()
 	if [ ! -d "$LOG_DIR" ]; then
 		mkdir $LOG_DIR
 	fi	
-	echo "$NOW - Ping:$PING DOWNLOAD:$DOWN UPLOAD:$UP" >> $LOG_DIR/$LOG_NAME
+	echo "$NOW - Ping:$PING DOWNLOAD:$DOWN UPLOAD:$UP CLIENT_ID: $CLIENT_ID" >> $LOG_DIR/$LOG_NAME
 	
 }
 
@@ -58,9 +58,9 @@ send_pbi()
 	shopt -s nocasematch
 	if [[ $SENDTOPBI == "True" ]]; then
 		DATE=$(date +"%Y-%m-%dT%H:%M:%S.0Z")
-		$SF_PATH/pbiRestApi $DATE $DOWN $UP $PING
+		$SF_PATH/pbiRestApi $DATE $DOWN $UP $PING $CLIENT_ID
 		echo "$NOW - PBI Enable - Running" >>$LOG_DIR/$LOG_NAME
-	else
+	else
 		echo "$NOW - PBI Disable" >> $LOG_DIR/$LOG_NAME	
 	fi
 }

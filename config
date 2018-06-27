@@ -1,3 +1,5 @@
+#Client ID
+CLIENT_ID=AC-ITAM
 # Speedflow user
 SF_USER=speedflow
 #Path for speedflow

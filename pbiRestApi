@@ -19,6 +19,7 @@ STATUS=$(
 	\"date\" :\"$1\",
 	\"download\" :$2,
 	\"upload\" :$3,
+	\"id\" :$5,
 	\"ping\" :$4
 	}
 	]" \
